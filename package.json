@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "save-dev": "tsx src/_shared/infra/http/server.ts",
+    "save-dev": "tsx src/_shared/infra/http/routes/server.ts",
+    "save:seed-dev": "tsx src/_shared/infra/client/seed.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
