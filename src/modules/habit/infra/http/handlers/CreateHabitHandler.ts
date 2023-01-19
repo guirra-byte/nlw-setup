@@ -1,15 +1,22 @@
-import { createHabitShorthand } from '../fastify/shorthands/CreateHabitShorthand';
-import { FastifyRequest } from 'fastify';
+import { FastifyRequest, FastifyReply } from 'fastify';
 import { container } from '../../../../../_shared/infra/container';
-import type { FastifyZod } from 'fastify-zod';
+import { validatorObject } from '../../../validator/validator';
+import { ICreateHabitDTO } from '../../../dtos/ICreateHabitDTO';
+import { Habit } from '@prisma/client';
 
-interface IRequest extends FastifyRequest {
-  body: FastifyZod<typeof createHabitShorthand>;
-}
-
-export async function createHabitHandler(request: IRequest): Promise<void> {
-  const { title, weekDays } = request.body;
+export async function createHabitHandler(
+  request: FastifyRequest,
+  reply: FastifyReply,
+): Promise<Habit> {
+  const { title, weekDays } = request.body as ICreateHabitDTO;
+  const data = validatorObject.createHabit.parse({
+    title: title,
+    weekDays: weekDays,
+  });
 
   const createHabitService = container.resolve('createHabitService');
-  await createHabitService.execute(title, weekDays);
+  const habit = await createHabitService.execute(data.title, data.weekDays);
+
+  reply.status(200);
+  return habit;
 }

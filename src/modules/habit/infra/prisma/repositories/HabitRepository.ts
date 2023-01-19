@@ -1,3 +1,4 @@
+import { Habit } from '@prisma/client';
 import { client } from '../../../../../_shared/infra/prisma/prismaClient';
 import { ICreateHabitDTO } from '../../../dtos/ICreateHabitDTO';
 import { IHabitRepository } from '../../../repositories/IHabitRepository';
@@ -9,8 +10,8 @@ export class HabitRepository implements IHabitRepository {
     this.ormRepository = client.habit;
   }
 
-  async create(habit: ICreateHabitDTO): Promise<void> {
-    await this.ormRepository.create({
+  async create(habit: ICreateHabitDTO): Promise<Habit> {
+    return await this.ormRepository.create({
       data: {
         title: habit.title,
         weekDays: {

@@ -1,22 +1,24 @@
 import { RouteShorthandOptions } from 'fastify';
 import { validatorObject } from '../../../../validator/validator';
 
-export const createHabitShorthand: RouteShorthandOptions = {
+export const findHabitByCreationDateShorthand: RouteShorthandOptions = {
   schema: {
-    body: validatorObject.createHabit,
+    body: validatorObject.findHabitByCreationDate,
     response: {
       200: {
         type: 'object',
         properties: {
+          id: { type: 'string' },
           title: { type: 'string' },
-          weekDays: { type: 'array' },
+          created_at: { type: 'date' },
         },
       },
-      400: {
+      404: {
         type: 'object',
         properties: {
-          message: { type: 'message' },
-          status: { type: 'number' },
+          message: { type: 'string' },
+          statusCode: { type: 'number' },
+          module: { type: 'string' },
         },
       },
     },
