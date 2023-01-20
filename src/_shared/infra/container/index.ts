@@ -1,7 +1,7 @@
 import { createContainer, asClass } from 'awilix';
 import { HabitRepository } from '../../../modules/habit/infra/prisma/repositories/HabitRepository';
 import { CreateHabitService } from '../../../modules/habit/services/CreateHabitService';
-import { FindHabitByCreationDateService } from '../../../modules/habit/services/FindHabitByCreattionDateService';
+import { FindHabitByCreationDateService } from '../../../modules/habit/services/FindHabitByCreationDateService';
 
 const container = createContainer({ injectionMode: 'CLASSIC' });
 

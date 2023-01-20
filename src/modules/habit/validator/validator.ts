@@ -1,12 +1,13 @@
 import { z } from 'zod';
+import { Type } from '@sinclair/typebox';
 
 const validatorObject = {
-  createHabit: z.object({
-    title: z.string(),
-    weekDays: z.array(z.number().min(0).max(6)),
+  createHabit: Type.Object({
+    title: Type.String(),
+    weekDays: Type.Array(Type.Number()),
   }),
-  findHabitByCreationDate: z.object({
-    start_at: z.date(),
+  findHabitByCreationDate: Type.Object({
+    start_at: Type.Date(),
   }),
 };
 

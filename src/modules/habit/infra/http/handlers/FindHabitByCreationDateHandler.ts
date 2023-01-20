@@ -3,7 +3,7 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 import { container } from '../../../../../_shared/infra/container';
 
 interface IRequest {
-  start_at: Date;
+  start_at: string;
 }
 
 export async function findHabitByCreationDateHandler(
